@@ -1,7 +1,7 @@
 import { alpacaConfig } from "../alpacaConfig";
 
 const getRandomItemFromArray = (arr) => {
-	const randNum = Math.floor(Math.random() * arr.length);
+	// const randNum = Math.floor(Math.random() * arr.length);
 	// continued
 };
 

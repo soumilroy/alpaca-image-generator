@@ -8,7 +8,7 @@ import Header from "./Header";
 import download from "downloadjs";
 import { getImage } from "../utils/getImage";
 import { toPng } from "html-to-image";
-import { randomize } from "../utils/randomize";
+// import { randomize } from "../utils/randomize";
 
 const Alpaca = () => {
 	const [config, setConfig] = useState(alpacaConfig);
@@ -27,17 +27,17 @@ const Alpaca = () => {
 		const { directory: dir } = feature;
 		const { filename: bgImage } = attribute;
 
-		const configClone = [...config];
-		const selectedFeatureIndex = configClone.indexOf(feature);
-		const selectedAttrIndex =
-			configClone[selectedFeatureIndex].items.indexOf(attribute);
+		// const configClone = [...config];
+		// const selectedFeatureIndex = configClone.indexOf(feature);
+		// const selectedAttrIndex =
+		// 	configClone[selectedFeatureIndex].items.indexOf(attribute);
 
-		configClone[selectedFeatureIndex].items.forEach(
-			(attr) => (attr.selected = false)
-		);
-		configClone[selectedFeatureIndex].items[selectedAttrIndex].selected = true;
+		// configClone[selectedFeatureIndex].items.forEach(
+		// 	(attr) => (attr.selected = false)
+		// );
+		// configClone[selectedFeatureIndex].items[selectedAttrIndex].selected = true;
 
-		setConfig(configClone);
+		// setConfig(configClone);
 
 		getImage(dir, bgImage, (image) => {
 			switch (dir) {
@@ -82,8 +82,8 @@ const Alpaca = () => {
 	};
 
 	const randomizeImage = () => {
-		const randomAlpacaConfig = randomize();
-		console.log(randomAlpacaConfig);
+		// const randomAlpacaConfig = randomize();
+		// console.log(randomAlpacaConfig);
 		// setConfig(randomAlpacaConfig);
 	};
 
@@ -103,7 +103,7 @@ const Alpaca = () => {
 				feature.items.filter((at) => at.filename === "default")[0]
 			)
 		);
-	}, []);
+	}, [config]);
 
 	const alpacaAttr = {
 		bg,
