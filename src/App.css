@@ -181,11 +181,11 @@ h2 {
 }
 
 .inner .left {
-	width: 620px;
+	width: 520px;
 }
 
 .inner .right {
-	width: 480px;
+	width: 600px;
 	padding: 2rem;
 }
 
@@ -229,7 +229,8 @@ h2 {
 	cursor: pointer;
 }
 
-.btn:hover {
+.btn:hover,
+.selected {
 	background-color: white;
 	color: #282c34;
 }

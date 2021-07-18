@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { getImage } from "../utils/getImage";
-import { toPng } from "html-to-image";
 import { alpacaConfig } from "../alpacaConfig";
 import Buttons from "./buttons";
 import AlpacaArt from "./alpacaArt";
 import Actions from "./actions";
 import Controls from "./Controls";
+import Header from "./Header";
 import download from "downloadjs";
+import { getImage } from "../utils/getImage";
+import { toPng } from "html-to-image";
+import { randomize } from "../utils/randomize";
 
 const Alpaca = () => {
+	const [config, setConfig] = useState(alpacaConfig);
 	const [bg, setBg] = useState(null);
 	const [neck, setNeck] = useState(null);
 	const [ears, setEars] = useState(null);
@@ -18,9 +21,24 @@ const Alpaca = () => {
 	const [mouth, setMouth] = useState(null);
 	const [nose, setNose] = useState(null);
 	const [accessories, setAccessories] = useState(null);
-	const [feature, setFeature] = useState(alpacaConfig[0]);
+	const [feature, setFeature] = useState(config[0]);
 
-	const changeImage = (dir, bgImage) => {
+	const changeImage = (feature, attribute) => {
+		const { directory: dir } = feature;
+		const { filename: bgImage } = attribute;
+
+		const configClone = [...config];
+		const selectedFeatureIndex = configClone.indexOf(feature);
+		const selectedAttrIndex =
+			configClone[selectedFeatureIndex].items.indexOf(attribute);
+
+		configClone[selectedFeatureIndex].items.forEach(
+			(attr) => (attr.selected = false)
+		);
+		configClone[selectedFeatureIndex].items[selectedAttrIndex].selected = true;
+
+		setConfig(configClone);
+
 		getImage(dir, bgImage, (image) => {
 			switch (dir) {
 				case "backgrounds":
@@ -28,6 +46,9 @@ const Alpaca = () => {
 					break;
 				case "neck":
 					setNeck(image);
+					break;
+				case "nose":
+					setNose(image);
 					break;
 				case "eyes":
 					setEyes(image);
@@ -52,6 +73,7 @@ const Alpaca = () => {
 			}
 		});
 	};
+
 	const downloadImage = () => {
 		const alpacaCanvasNode = document.getElementById("alpaca");
 		toPng(alpacaCanvasNode).then((dataUrl) => {
@@ -59,36 +81,28 @@ const Alpaca = () => {
 		});
 	};
 
-	const randomizeImage = () => {};
+	const randomizeImage = () => {
+		const randomAlpacaConfig = randomize();
+		console.log(randomAlpacaConfig);
+		// setConfig(randomAlpacaConfig);
+	};
+
+	const setFeatureItem = (feature) => {
+		const configClone = [...config];
+		const selectedIndex = configClone.indexOf(feature);
+		configClone.forEach((ft) => (ft.selected = false));
+		configClone[selectedIndex].selected = true;
+		setConfig(configClone);
+		setFeature(feature);
+	};
 
 	useEffect(() => {
-		getImage("backgrounds", "grey70", (image) => {
-			setBg(image);
-		});
-		getImage("neck", "default", (image) => {
-			setNeck(image);
-		});
-		getImage("ears", "default", (image) => {
-			setEars(image);
-		});
-		getImage("eyes", "default", (image) => {
-			setEyes(image);
-		});
-		getImage("hair", "default", (image) => {
-			setHair(image);
-		});
-		getImage("leg", "default", (image) => {
-			setLeg(image);
-		});
-		getImage("mouth", "default", (image) => {
-			setMouth(image);
-		});
-		getImage("accessories", "headphone", (image) => {
-			setAccessories(image);
-		});
-		getImage("", "nose", (image) => {
-			setNose(image);
-		});
+		[...config].forEach((feature) =>
+			changeImage(
+				feature,
+				feature.items.filter((at) => at.filename === "default")[0]
+			)
+		);
 	}, []);
 
 	const alpacaAttr = {
@@ -102,21 +116,10 @@ const Alpaca = () => {
 		ears,
 		accessories,
 	};
+
 	return (
 		<div className="container">
-			<div>
-				<h1 className="heading">
-					Alpaca Image Generator
-					<a
-						href="https://soumilroy.com"
-						target="_blank"
-						className="attribution"
-						rel="noreferrer"
-					>
-						by Soumil Roy
-					</a>
-				</h1>
-			</div>
+			<Header />
 			<div className="inner">
 				<div className="left">
 					<div className="alpaca" id="alpaca">
@@ -129,11 +132,11 @@ const Alpaca = () => {
 				</div>
 				<div className="right">
 					<h2 className="heading">Accessorize your Alpaca</h2>
-					{alpacaConfig.map((attributes) => (
+					{config.map((attributes) => (
 						<Controls
 							key={attributes.id}
 							attributes={attributes}
-							setFeature={setFeature}
+							setFeatureItem={setFeatureItem}
 						/>
 					))}
 					<hr />

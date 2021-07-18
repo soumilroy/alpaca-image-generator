@@ -1,11 +1,11 @@
 import React from "react";
 
-const Controls = ({ attributes, setFeature }) => {
+const Controls = ({ attributes, setFeatureItem }) => {
 	return (
 		<button
-			className="btn"
+			className={`btn ${attributes.selected ? "selected" : ""}`}
 			key={attributes.id}
-			onClick={() => setFeature(attributes)}
+			onClick={() => setFeatureItem(attributes)}
 		>
 			{attributes.label}
 		</button>

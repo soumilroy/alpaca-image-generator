@@ -1,11 +1,9 @@
 export const getImage = (
 	directory = "backgrounds",
-	img = "blue60",
+	img = "default",
 	callback
 ) => {
-	import(`../alpaca${directory ? "/" + directory : ""}/${img}.png`).then(
-		(image) => {
-			callback(image.default);
-		}
-	);
+	import(`../alpaca/${directory}/${img}.png`).then((image) => {
+		callback(image.default);
+	});
 };
