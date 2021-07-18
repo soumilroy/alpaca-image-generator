@@ -111,6 +111,7 @@ const Alpaca = () => {
 						href="https://soumilroy.com"
 						target="_blank"
 						className="attribution"
+						rel="noreferrer"
 					>
 						by Soumil Roy
 					</a>
