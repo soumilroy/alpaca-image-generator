@@ -1,3 +1,138 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+body {
+	font-family: "Comfortaa", cursive;
+	line-height: 1;
+}
+ol,
+ul {
+	list-style: none;
+}
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Alfa Slab One", cursive;
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	.App-logo {
 		animation: App-logo-spin infinite 20s linear;
@@ -7,20 +142,100 @@
 .App-header {
 	background-color: #282c34;
 	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	font-size: calc(10px + 2vmin);
 	color: white;
+	padding: 2rem;
+}
+
+img {
+	max-width: 100%;
+}
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.heading {
+	font-size: 3rem;
+}
+.inner {
+	margin-top: 3rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.inner .left {
+	width: 620px;
+}
+
+.inner .right {
+	width: 480px;
+	padding: 0 2rem;
 }
 
 .alpaca {
 	position: relative;
+	line-height: 0;
 }
-.neck {
+
+.background {
+	max-width: 100%;
+}
+.neck,
+.mouth,
+.nose,
+.ears,
+.hair,
+.leg,
+.eyes,
+.accessories {
 	position: absolute;
-	bottom: 6px;
-	left: 10%;
-	width: 20em;
+	bottom: 0;
+	left: 0;
+	width: 25em;
+	z-index: 10;
+}
+
+.ears,
+.hair {
+	z-index: 0;
+}
+
+.btn {
+	font-family: inherit;
+	display: inline-block;
+	background-color: transparent;
+	border: 1px solid white;
+	color: white;
+	border-radius: 100px;
+	margin: 10px 10px 0 0;
+	padding: 6px 12px;
+	cursor: pointer;
+}
+
+.btn-controls {
+	margin-bottom: 1rem;
+}
+
+.btn-controls h3 {
+	color: white;
+	font-size: 1.25rem;
+}
+
+.actions-panel {
+	text-align: center;
+}
+
+.actions-panel button {
+	font-family: "Alfa Slab One", cursive;
+	display: inline-block;
+	font-size: 1.2rem;
+	background-color: white;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	border: none;
+	border-radius: 100px;
+	margin: 20px 20px 0 0;
+	padding: 10px 40px;
+	cursor: pointer;
 }
