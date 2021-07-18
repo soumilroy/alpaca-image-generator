@@ -155,8 +155,24 @@ img {
 	margin: 0 auto;
 }
 
-.heading {
+h1 {
 	font-size: 3rem;
+}
+
+h2 {
+	font-size: 1.65rem;
+}
+
+.heading .attribution {
+	display: inline-block;
+	margin-left: 20px;
+	font-size: 1.2rem;
+	color: #fcd33f;
+	text-decoration: none;
+}
+
+.heading .attribution:hover {
+	text-decoration: underline;
 }
 .inner {
 	margin-top: 3rem;
@@ -170,7 +186,7 @@ img {
 
 .inner .right {
 	width: 480px;
-	padding: 0 2rem;
+	padding: 2rem;
 }
 
 .alpaca {
@@ -213,6 +229,11 @@ img {
 	cursor: pointer;
 }
 
+.btn:hover {
+	background-color: white;
+	color: #282c34;
+}
+
 .btn-controls {
 	margin-bottom: 1rem;
 }
@@ -238,4 +259,13 @@ img {
 	margin: 20px 20px 0 0;
 	padding: 10px 40px;
 	cursor: pointer;
+}
+
+.controls {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+hr {
+	margin: 3rem 0;
 }

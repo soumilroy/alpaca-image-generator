@@ -5,6 +5,8 @@ import { alpacaConfig } from "../alpacaConfig";
 import Buttons from "./buttons";
 import AlpacaArt from "./alpacaArt";
 import Actions from "./actions";
+import Controls from "./Controls";
+import download from "downloadjs";
 
 const Alpaca = () => {
 	const [bg, setBg] = useState(null);
@@ -16,6 +18,7 @@ const Alpaca = () => {
 	const [mouth, setMouth] = useState(null);
 	const [nose, setNose] = useState(null);
 	const [accessories, setAccessories] = useState(null);
+	const [feature, setFeature] = useState(alpacaConfig[0]);
 
 	const changeImage = (dir, bgImage) => {
 		getImage(dir, bgImage, (image) => {
@@ -49,17 +52,17 @@ const Alpaca = () => {
 			}
 		});
 	};
-	const downloadImg = () => {
+	const downloadImage = () => {
 		const alpacaCanvasNode = document.getElementById("alpaca");
 		toPng(alpacaCanvasNode).then((dataUrl) => {
-			var img = new Image();
-			img.src = dataUrl;
-			document.body.appendChild(img);
+			download(dataUrl, "my-alpaca.png");
 		});
 	};
 
+	const randomizeImage = () => {};
+
 	useEffect(() => {
-		getImage("backgrounds", "green50", (image) => {
+		getImage("backgrounds", "grey70", (image) => {
 			setBg(image);
 		});
 		getImage("neck", "default", (image) => {
@@ -102,25 +105,42 @@ const Alpaca = () => {
 	return (
 		<div className="container">
 			<div>
-				<h1 className="heading">Alpaca Image Generator</h1>
+				<h1 className="heading">
+					Alpaca Image Generator
+					<a
+						href="https://soumilroy.com"
+						target="_blank"
+						className="attribution"
+					>
+						by Soumil Roy
+					</a>
+				</h1>
 			</div>
 			<div className="inner">
 				<div className="left">
 					<div className="alpaca" id="alpaca">
 						<AlpacaArt attr={alpacaAttr} />
 					</div>
-					<Actions />
+					<Actions
+						downloadImage={downloadImage}
+						randomizeImage={randomizeImage}
+					/>
 				</div>
 				<div className="right">
+					<h2 className="heading">Accessorize your Alpaca</h2>
 					{alpacaConfig.map((attributes) => (
-						<Buttons
+						<Controls
 							key={attributes.id}
 							attributes={attributes}
-							changeImage={changeImage}
+							setFeature={setFeature}
 						/>
 					))}
-
-					{/* <button onClick={() => downloadImg()}>Download Image</button> */}
+					<hr />
+					<Buttons
+						key={feature.id}
+						attributes={feature}
+						changeImage={changeImage}
+					/>
 				</div>
 			</div>
 		</div>

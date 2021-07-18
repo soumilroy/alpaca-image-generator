@@ -1,10 +1,10 @@
 import React from "react";
 
-const Actions = ({ downloadImage, randomize }) => {
+const Actions = ({ downloadImage, randomizeImage }) => {
 	return (
 		<div className="actions-panel">
-			<button>Randomize </button>
-			<button>Download </button>
+			<button onClick={() => randomizeImage()}>Randomize </button>
+			<button onClick={() => downloadImage()}>Download </button>
 		</div>
 	);
 };
