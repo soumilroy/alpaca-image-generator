@@ -99,7 +99,7 @@ const Alpaca = () => {
 
   useEffect(() => {
     const renderAlpaca = () => {
-      alpacaConfig.forEach(feature => {
+      config.forEach(feature => {
         const attribute = feature.items.filter(
           at => at.filename === 'default'
         )[0]
